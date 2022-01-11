@@ -1,9 +1,0 @@
-{
-    "password": "metricbeat-test-password",
-    "roles": [
-        "metricbeat_reader",
-        "monitoring_user",
-        "beats_admin"
-    ],
-    "full_name": "Reader Metricbeat User"
-}

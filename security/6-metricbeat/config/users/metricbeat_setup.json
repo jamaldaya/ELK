@@ -1,9 +1,0 @@
-{
-    "password": "metricbeat-test-password",
-    "roles": [
-        "metricbeat_setup",
-        "kibana_admin",
-        "ingest_admin"
-    ],
-    "full_name": "Setup Metricbeat User"
-}
