@@ -1,4 +1,4 @@
-# Demarrage Elasticsearch
+# Start Elasticsearch
 
 ```
 docker-compose -f compose-elasticsearch.yml up -d
