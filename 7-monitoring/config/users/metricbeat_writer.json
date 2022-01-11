@@ -1,0 +1,9 @@
+{
+    "password": "DontUse",
+    "roles": [
+        "metricbeat_writer",
+        "remote_monitoring_collector",
+        "remote_monitoring_agent"
+    ],
+    "full_name": "Writer Metricbeat User"
+}

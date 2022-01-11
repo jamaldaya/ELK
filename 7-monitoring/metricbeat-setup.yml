@@ -1,0 +1,22 @@
+version: '3'
+services:
+  metricbeat_setup:
+    container_name: metricbeat_setup
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: >
+      bash -c 'metricbeat setup -e --strict.perms=false'
+    user: "0"
+    working_dir: /usr/share/metricbeat
+    volumes: 
+      - ./config/metricbeat-setup.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+
+volumes: 
+  certs:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

@@ -1,0 +1,80 @@
+version: '2.2'
+
+services:
+  metricbeat-es01:
+    container_name: metricbeat-es01
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-es01.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-es02:
+    container_name: metricbeat-es02
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-es02.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-es03:
+    container_name: metricbeat-es03
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-es03.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-kib01:
+    container_name: metricbeat-kib01
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-kib01.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-kib02:
+    container_name: metricbeat-kib02
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-kib02.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-logstash:
+    container_name: metricbeat-logstash
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-logstash.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+  metricbeat-nginx:
+    container_name: metricbeat-nginx
+    image: docker.elastic.co/beats/metricbeat:7.16.0
+    command: -e --strict.perms=false
+    user: "0"
+    volumes: 
+      - ./config/metricbeat-nginx.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - certs:/usr/share/metricbeat/certificates:ro
+    networks:
+      - elastic
+volumes: 
+  certs:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

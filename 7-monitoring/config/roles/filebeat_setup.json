@@ -1,0 +1,17 @@
+{
+    "cluster": [
+      "monitor",
+      "manage_ilm"
+    ],
+    "indices": [
+      {
+        "names": [
+          "filebeat-*"
+        ],
+        "privileges": [
+          "manage",
+          "write"
+        ]
+      }
+    ]
+  }

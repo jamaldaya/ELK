@@ -1,0 +1,10 @@
+filebeat.inputs:
+- type: log
+  paths:
+    - '/logs/*.log'
+  tags: ["default"]
+  fields:
+    beamline: ${BEAMLINE}
+
+output.logstash:
+  hosts: ["logstash:5044"]
