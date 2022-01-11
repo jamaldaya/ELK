@@ -1,0 +1,6 @@
+http.host: "0.0.0.0"
+http.port: 9600
+
+config.reload.automatic: true
+
+pipeline.ecs_compatibility: disabled
