@@ -1,8 +1,0 @@
-{
-    "password": "DontUse",
-    "roles": [
-        "logstash_reader",
-        "logstash_admin"
-    ],
-    "full_name": "Kibana User for Logstash"
-}
