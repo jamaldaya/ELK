@@ -1,0 +1,18 @@
+{
+    "cluster": [
+      "monitor",
+      "read_ilm"
+    ],
+    "indices": [
+      {
+        "names": [
+          "metricbeat-*"
+        ],
+        "privileges": [
+          "create_doc",
+          "create_index",
+          "view_index_metadata"
+        ]
+      }
+    ]
+  }

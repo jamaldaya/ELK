@@ -1,0 +1,34 @@
+version: '2.2'
+services:
+  kib01:
+    image: docker.elastic.co/kibana/kibana:7.15.2
+    container_name: kib01
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+      - certs:/usr/share/kibana/config/certificates:ro
+    environment:
+      - server.name=kib01
+    networks:
+      - elastic
+  kib02:
+    image: docker.elastic.co/kibana/kibana:7.15.2
+    container_name: kib02
+    ports:
+      - "5602:5601"
+    volumes:
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+      - certs:/usr/share/kibana/config/certificates:ro
+    environment:
+      - server.name=kib02
+    networks:
+      - elastic
+
+volumes:
+  certs:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

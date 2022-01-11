@@ -1,0 +1,21 @@
+version: '2.2'
+
+services:
+  check:
+    container_name: check
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
+    command: >
+      bash -c '
+        ls -al /usr/share/elasticsearch/config/certificates/
+        ls -al /usr/share/elasticsearch/config
+        '
+    #user: "0"
+    volumes: 
+      - certs:/usr/share/elasticsearch/config/certificates:ro
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./config/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore:ro
+
+volumes: 
+  certs:
+    driver: local
+

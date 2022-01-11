@@ -1,0 +1,17 @@
+# Kibana configuration for docker target
+server.host: "0"
+server.name: kib01
+server.publicBaseUrl: http://localhost:5601
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: [ "https://es01:9200", "https://es02:9200", "https://es03:9200" ]
+
+monitoring.ui.container.elasticsearch.enabled: true
+
+elasticsearch.username: "kibana"
+elasticsearch.password: "wOqeqhlKTSMCEyvHNktH" 
+
+elasticsearch.ssl.certificateAuthorities: /usr/share/kibana/config/certificates/ca/ca.crt
+
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/certificates/kib01/kib01.crt
+server.ssl.key: /usr/share/kibana/config/certificates/kib01/kib01.key

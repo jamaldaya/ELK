@@ -1,0 +1,25 @@
+output.elasticsearch:
+  hosts: [ "es01:9200", "es02:9200", "es03:9200" ]
+  protocol: "https"
+  username: "metricbeat_writer"
+  password: "metricbeat-test-password"
+  ssl:
+    certificate_authorities:  ["/usr/share/metricbeat/certificates/ca/ca.crt"]
+    verification_mode: "certificate"
+
+setup.kibana:
+  host: "kib01:5601" 
+  username: "metricbeat_setup"
+  password: "metricbeat-test-password"
+
+metricbeat.modules:
+  - module: elasticsearch 
+    xpack.enabled: true
+    period: 10s
+    hosts: ["https://es01:9200", "https://es02:9200", "https://es03:9200" ]
+    username: "remote_monitoring_user"
+    password: "eQEy7tb98i4DMAcN0OAf"
+    ssl:     
+      enabled: true
+      certificate_authorities: ["/usr/share/metricbeat/certificates/ca/ca.crt"]
+      verification_mode: "certificate"
