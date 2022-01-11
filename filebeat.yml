@@ -1,0 +1,142 @@
+#YAT4TANGO
+filebeat.inputs:
+- type: log
+  paths:
+    - /tmp/test/cpp_devices/**
+  tags: ["yat4tango"]
+  fields:
+    beamline: flyscan
+
+#Envoi Logstash
+output.logstash:
+  hosts: ["localhost:5044"] 
+
+#Affiche sur Console
+output.console.pretty: true
+
+
+#PASSERELLE
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/passerelle/*
+  tags: ["passerelle"]
+  multiline.type: pattern
+  multiline.pattern: '^[[:digit:]]{2} [[:alpha:]]{3} [[:digit:]]{4} [[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{3}'
+  multiline.negate: true
+  multiline.match: after
+ 
+ 
+output.logstash:
+  hosts: ["localhost:5044"]
+
+
+
+#CPP DEVICES        
+filebeat.inputs:
+- type: log                        #stdin when we copy log in cosole and log when we do the log files in the path
+  paths:
+    - /vagrant/ds_RecordingManager/cppdevices/**
+  tags: ["cppdevices"]
+  multiline.type: pattern
+  multiline.pattern: '^<log4j:event'
+  multiline.negate: true
+  multiline.match: after
+ 
+ 
+output.logstash:
+  hosts: ["localhost:5044"]
+
+
+#JAVA DEVICES
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/javadevices/**
+  tags: ["javadevices"]
+  multiline.type: pattern
+# multiline.pattern: '^[A-Z]{4,5}'
+  multiline.pattern: '^(DEBUG|INFO|WARN|ERROR)'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"]
+
+
+
+
+#SPYC
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/spyc/**
+  tags: ["spyc"]
+  multiline.type: pattern
+  #multiline.pattern: '# {Mon}{Tue}{Wed}{Thu}{Fri}{Sat}{Sun}'
+  multiline.pattern: '^# ([Mm]on|[Tt]ue|[Ww]ed|[Tt]hu|[Ff]ri|[Ss]at|[Ss]un)'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"]
+
+
+
+#JAVAGUI
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/javagui/**
+  tags: ["javagui"]
+  multiline.type: pattern
+  multiline.pattern: '^[0-9]{2}\:[0-9]{2}\:[0-9]{2}\.[0-9]{3}'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"]
+
+
+
+#COOXDAEMON
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/coox/mars/CooxDaemon/**
+  tags: ["cooxdaemon"]
+  multiline.type: pattern
+  multiline.pattern: '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{2}'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"] 
+
+#COOXVIEWER
+filebeat.inputs:
+- type: stdin
+  paths:
+    - /vagrant/ds_RecordingManager/coox/mars/CooxViewer/**
+  tags: ["cooxviewer"]
+  multiline.type: pattern
+  multiline.pattern: '^[0-9]{1,2}'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"] 
+
+  #LOGDUMPS
+filebeat.inputs:
+- type: log
+  paths:
+    - /vagrant/ds_RecordingManager/dumps/**
+  tags: ["logdumps"]
+  multiline.type: pattern
+  multiline.pattern: '^Dserver\:'
+  multiline.negate: true
+  multiline.match: after
+
+output.logstash:
+  hosts: ["localhost:5044"] 
