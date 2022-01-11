@@ -1,0 +1,84 @@
+#Minimal security set-up
+
+#Stop Kibana 
+
+sudo systemctl stop kibana
+
+#Stop Elasticseach
+
+sudo systemctl stop elasticsearch
+
+#Enable xpack in elasticsearch.yml
+
+sudo nano etc/elasticsearch/elasticsearch.yml
+xpack.security.enabled: true
+sudo systemctl start elasticsearch
+
+#Setup default user passwords
+
+cd /usr/share/elasticsearch/bin
+sudo ./elasticsearch-setup-passwords auto #auto-generated password for all built-in users
+#(kibana/logstash_system/apm_system/beats_system/elastic/remote_monitoring_user)
+sudo ./elasticsearch-setup-passwords interactive #chosen password 
+
+#System Passwords
+
+<< Default user passwords go here >> #copy and paste auto-generated passwords
+
+#To test:
+curl -XGET http://localhost:9200/_cluster/health?pretty
+#I should get an authentification error
+curl -XGET -u elastic:password http://localhost:9200/_cluster/health?pretty
+#succeful health cluster
+
+#Configure Kibana in kibana.yml
+
+sudo nano /etc/kibana/kibana.yml
+	### Elasticsearch authentification uncomment both lines
+	elasticsearch.username: "kibana"
+	elasticsearch.password: "new_password" #replace by the kibana built in password
+
+	### Security audit events
+	xpack.security.audit.enabled: true
+
+	### Idle timeout setting
+	xpack.security.session.idleTimeout: 30m
+
+sudo systemctl start kibana
+
+
+#Login as elastic and configure a new admin user
+
+In kibana type 
+username: elastic
+password: kibana auto generated password
+
+In Kibana press stackmanagement/security/users/create user/type username-password-confirmpassword-fullname-emailadress-role(superuser)/create user
+
+#Basic security set-up
+
+#Stop Kibana and Elastic search
+sudo systemctl stop kibana && sudo systemctl stop elasticsearch
+Generate a CA for cluster
+./bin/elasticsearch-certutil ca 
+=> accept default name "elastic-stack-ca.p12" this file contains public certificate for CA and the private key used to sign certificates for each node
+=> enter a password for CA
+Generate a certificate and a private key for nodes, include elastic-stack-ca.p12 generated before
+./bin/elasticsearch-certutil --ca elastic-stack-ca.p12
+=> enter password for ca
+=> create password for certificate and accept default file name
+On every node copy elastic-certificates.p12 into the $ES_PATH_CONF directory
+Encrypt internode comms using TLS
+Open elasticsearch.yml and modify the following:
+cluster.name: my-cluster
+node.name: node-1
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate 
+xpack.security.transport.ssl.client_authentication: required
+xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
+xpack.security.transport.ssl.truststore.path: elastic-certificates.p12
+Run to store the certificate password in the Elasticsearch keystore:
+./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
+./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
+Do this for all nodes
+Restart all Elasticsearch on all nodes
