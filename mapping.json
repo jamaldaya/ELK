@@ -1,0 +1,44 @@
+{
+    "index_patterns": ["tangocs-*"],
+    "template": "tangocs",
+    "version": 1,
+    "mappings": {
+      "properties": {
+        "timestamp_nanos" : {
+            "type": "date_nanos",
+            "format":"strict_date_optional_time_nanos"
+                    },
+        "device": {
+            "properties": {
+              "domain": {
+                "type": "keyword"
+              },
+              "family": {
+                "type": "keyword"
+              },
+              "instance": {
+                "type": "keyword"
+              },
+              "member": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              },
+              "source": {
+                "type": "keyword"
+              },
+              "actor": {
+                "type": "keyword"
+              }
+            }
+          },
+          "beamline": {
+            "type": "keyword"
+          },
+            "offset": {
+              "type": "long"
+            }
+          }
+    }
+}
