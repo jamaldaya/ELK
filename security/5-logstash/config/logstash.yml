@@ -1,0 +1,7 @@
+http.host: "0.0.0.0"
+http.port: 9600
+
+path.logs: /usr/share/logstash/logs
+pipeline.separate_logs : true
+
+config.reload.automatic: true

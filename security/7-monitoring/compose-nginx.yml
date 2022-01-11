@@ -1,0 +1,20 @@
+version: '2.2'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    networks:
+      - elastic
+    volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - certs:/certs:ro
+
+volumes:
+  certs:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

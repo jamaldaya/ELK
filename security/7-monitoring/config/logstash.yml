@@ -1,0 +1,8 @@
+config.reload.automatic: true
+http.host: 0.0.0.0
+http.port: 9600
+monitoring.cluster_uuid: ifR54BeWTOi-G9Xmc_8xTw
+monitoring.enabled: false
+node.name: logstash
+path.logs: /usr/share/logstash/logs
+pipeline.separate_logs: true
