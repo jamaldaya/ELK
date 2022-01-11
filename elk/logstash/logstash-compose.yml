@@ -1,0 +1,22 @@
+version: '3'
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.16.2
+    container_name: logstash
+    group_add:
+      - root
+    ports:
+      - 5044:5044
+      - 9600:9600
+    volumes:
+      - ./config/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./config/logstash/pipelines:/usr/share/logstash/pipelines
+      - ./config/logstash/mapping:/usr/share/logstash/mapping
+#      - ./logs:/usr/share/logstash/logs
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
