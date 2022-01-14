@@ -1,4 +1,5 @@
-server.host: "0"
+# Kibana configuration for docker target
+server.host: 0.0.0.0
 server.name: kibana
 server.publicBaseUrl: http://localhost:5601
 server.shutdownTimeout: "5s"
