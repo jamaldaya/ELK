@@ -1,0 +1,45 @@
+output.elasticsearch:
+  hosts: [ "http://elasticsearch:9200" ]
+  username: "elastic"
+  password: "PleaseChangeMe"
+
+setup.kibana:
+  host: "kibana:5601" 
+  username: "elastic"
+  password: "PleaseChangeMe"
+
+metricbeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+metricbeat.modules:
+  - module: elasticsearch 
+    xpack.enabled: true
+    period: 10s
+    hosts: [ "http://elasticsearch:9200" ]
+    scope: node
+    username: "elastic"
+    password: "PleaseChangeMe"
+  - module: kibana
+    xpack.enabled: true
+    metricsets: 
+      - stats
+      - status
+    period: 10s
+    hosts: [ "kibana:5601" ]
+    username: "elastic"
+    password: "PleaseChangeMe"
+  - module: logstash
+    xpack.enabled: true
+    metricsets: 
+      - node
+      - node_stats
+    period: 10s
+    hosts: ["logstash:9600"]
