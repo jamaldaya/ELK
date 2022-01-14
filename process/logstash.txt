@@ -29,13 +29,9 @@ sudo /usr/share/logstash/bin/logstash -f /vagrant/yat4tango.conf --config.reload
 
 
 
-
-
 sudo /usr/share/logstash/bin/logstash /vagrant/assembly/pipelineassembly.yml --config.reload.automatic #logstash assembly launch
 
 #take out -e or -f for not ignoring pipelines.yml
-
-
 
 
 
@@ -44,11 +40,6 @@ ps -ef                  #gestionnaire des taches
 sudo kill 29022         #le numero signfie le pid process ID
 
 history
-
-
-
-
-
 
 
 
@@ -62,15 +53,7 @@ vagrant halt
 
 
 
-
-
-
-
-
-
-
-
-# Allume avec pipelines
+# Demarrer avec pipelines
 
 sudo systemctl start logstash
 
