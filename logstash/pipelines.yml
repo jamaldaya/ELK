@@ -1,29 +1,34 @@
-- pipeline.id: beats
-  path.config: "/usr/share/logstash/pipelines/beats.conf"
-- pipeline.id: yat4tango
-  path.config: "/usr/share/logstash/pipelines/yat4tango.conf"
-- pipeline.id: cppdevices
-  path.config: "/usr/share/logstash/pipelines/cppdevices.conf"
-- pipeline.id: passerelle
-  path.config: "/usr/share/logstash/pipelines/passerelle.conf"
-- pipeline.id: javagui
-  path.config: "/usr/share/logstash/pipelines/javagui.conf"
+- pipeline.id: inputbeats
+  path.config: "/usr/share/logstash/pipelines/inputbeats.conf"
+- pipeline.id: distributor
+  path.config: "/usr/share/logstash/pipelines/distributor.conf"
 - pipeline.id: javadevices
   path.config: "/usr/share/logstash/pipelines/javadevices.conf"
-- pipeline.id: cooxdaemon
-  path.config: "/usr/share/logstash/pipelines/cooxdaemon.conf"
+- pipeline.id: logviewer
+  path.config: "/usr/share/logstash/pipelines/logviewer.conf"
+- pipeline.id: yat4tango
+  path.config: "/usr/share/logstash/pipelines/yat4tango.conf"
+- pipeline.id: backtrace
+  path.config: "/usr/share/logstash/pipelines/backtrace.conf"
+- pipeline.id: javagui
+  path.config: "/usr/share/logstash/pipelines/javagui.conf"
 - pipeline.id: cooxviewer
   path.config: "/usr/share/logstash/pipelines/cooxviewer.conf"
+- pipeline.id: cooxdaemon
+  path.config: "/usr/share/logstash/pipelines/cooxdaemon.conf"
+- pipeline.id: passerelleexecutiontrace
+  path.config: "/usr/share/logstash/pipelines/passerelle-execution-trace.conf"
 - pipeline.id: spyc
   path.config: "/usr/share/logstash/pipelines/spyc.conf"
-- pipeline.id: logdumps
-  path.config: "/usr/share/logstash/pipelines/logdumps.conf"
-- pipeline.id: metricbeat
-  path.config: "/usr/share/logstash/pipelines/metricbeat.conf"
-- pipeline.id: tangocs
-  path.config: "/usr/share/logstash/pipelines/tangocs.conf"
+- pipeline.id: collector
+  path.config: "/usr/share/logstash/pipelines/collector.conf"
 - pipeline.id: test
   path.config: "/usr/share/logstash/pipelines/test.conf"
+- pipeline.id: debug
+  path.config: "/usr/share/logstash/pipelines/debug.conf"
 - pipeline.id: trash
   path.config: "/usr/share/logstash/pipelines/trash.conf"
-  
+- pipeline.id: beats
+  path.config: "/usr/share/logstash/pipelines/beats.conf"
+- pipeline.id: tangocs
+  path.config: "/usr/share/logstash/pipelines/tangocs.conf"
