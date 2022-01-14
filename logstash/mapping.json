@@ -1,44 +1,45 @@
 {
-    "index_patterns": ["tangocs-*"],
-    "template": "tangocs",
-    "version": 1,
-    "mappings": {
-      "properties": {
-        "timestamp_nanos" : {
-            "type": "date_nanos",
-            "format":"strict_date_optional_time_nanos"
-                    },
-        "device": {
-            "properties": {
-              "domain": {
-                "type": "keyword"
-              },
-              "family": {
-                "type": "keyword"
-              },
-              "instance": {
-                "type": "keyword"
-              },
-              "member": {
-                "type": "keyword"
-              },
-              "name": {
-                "type": "keyword"
-              },
-              "source": {
-                "type": "keyword"
-              },
-              "actor": {
-                "type": "keyword"
-              }
-            }
-          },
-          "beamline": {
+  "index_patterns": [
+    "tangocs-*"
+  ],
+  "template": "tangocs",
+  "version": 1,
+  "mappings": {
+    "properties": {
+      "device": {
+        "properties": {
+          "name": {
             "type": "keyword"
           },
-            "offset": {
-              "type": "long"
-            }
+          "server": {
+            "type": "keyword"
+          },
+          "instance": {
+            "type": "keyword"
           }
+        }
+      },
+      "beamline": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          }
+        }
+      },
+      "timestamp_nanos": {
+        "type": "date_nanos",
+        "format": "strict_date_optional_time_nanos"
+      },
+      "passerelle": {
+        "properties": {
+          "source": {
+            "type": "keyword"
+          },
+          "actor": {
+            "type": "keyword"
+          }
+        }
+      }
     }
+  }
 }
