@@ -1,0 +1,85 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - discovery.seed_hosts=elasticsearch
+      - cluster.initial_master_nodes=elasticsearch
+      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=true
+      - xpack.security.transport.ssl.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    volumes:
+      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - data:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.16.2
+    container_name: kibana
+    environment:
+      - SERVER_NAME=kibana
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.16.2
+    container_name: logstash
+    group_add:
+      - root
+    ports:
+      - 5044:5044
+      - 9600:9600
+    volumes:
+      - ./config/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./config/logstash/pipelines:/usr/share/logstash/pipelines
+      - ./config/logstash/mapping:/usr/share/logstash/mapping
+      - ./logs:/usr/share/logstash/logs
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.16.2
+    container_name: metricbeat
+    command: -e --strict.perms=false
+    user: root
+    volumes: 
+      - ./config/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+    networks:
+      - elastic
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.16.2
+    container_name: filebeat
+    command: -e --strict.perms=false
+    user: root
+    environment:
+      - BEAMLINE=${BEAMLINE}
+    volumes: 
+      - ./config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ${LOGS_SOURCE}:/logs
+    networks:
+      - elastic
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
