@@ -1,6 +1,12 @@
 http.host: "0.0.0.0"
 http.port: 9600
 
+node.name: logstash
+
 config.reload.automatic: true
 
 pipeline.ecs_compatibility: disabled
+
+monitoring.enabled: false
+monitoring.cluster_uuid: cQiq4WPbRx6L9ybbC_kz2Q
+
