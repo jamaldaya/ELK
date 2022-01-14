@@ -1,20 +1,19 @@
 {
-  "policy": {
-    "phases": {
-      "hot": {
-        "actions": {
-          "rollover": {
-            "max_age": "1d"
-          }
-        },
-        "min_age": "0ms"
-      },
-      "delete": {
-        "min_age": "5d",
-        "actions": {
-          "delete": {}
-        }
-      }
-    }
-  }
+	"policy": {
+		"phases": {
+			"hot": {
+				"actions": {
+					"rollover": {
+						"max_age": "1h"
+					}
+				}
+			},
+			"delete": {
+				"min_age": "1d",
+				"actions": {
+					"delete": {}
+				}
+			}
+		}
+	}
 }
