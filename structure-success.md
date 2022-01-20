@@ -101,18 +101,18 @@ After:
 	
 Before:
 
-17/01/19 14:40:41.961 - [INFO] : ModifyUIEvent[ServerStub[marssupervision:stubManager@172.19.1.6],marssupervision.web1:stubManager@172.19.1.6]
+17/01/19 14:40:41.961 - [INFO] :Service Database - Replication - Url blacklist updated: []
 
 After:
 
-{"agent":{"name":"localhost.localdomain","type":"filebeat","ephemeral_id":"a1ad8dcd-87a5-4f06-98ac-e753a145cb34","version":"7.14.0","hostname":"localhost.localdomain","id":"5f61175d-e407-49d3-b9a3-3efa77d25554"},"@timestamp":"2021-09-08T12:07:30.635Z","host":{"name":"localhost.localdomain"},"cooxdaemon":{"timestamp":"8/27/19 15:42:24.832","level":"INFO","message":"Service Database - Replication - Url blacklist updated: []"},"log":{"offset":2736,"file":{"path":"/vagrant/assembly/ds_RecordingManager/coox/mars/CooxDaemon/replication0.log"}},"ecs":{"version":"1.10.0"},"@version":"1","input":{"type":"log"},"tags":["cooxdaemon","beats_input_codec_plain_applied"]}
+{"agent":{"name":"localhost.localdomain","type":"filebeat","ephemeral_id":"a1ad8dcd-87a5-4f06-98ac-e753a145cb34","version":"7.14.0","hostname":"localhost.localdomain","id":"5f61175d-e407-49d3-b9a3-3efa77d25554"},"@timestamp":"2019-01-17T14:40:41.961Z","host":{"name":"localhost.localdomain"},"cooxdaemon":{"timestamp":"8/27/19 15:42:24.832","level":"INFO","message":"Service Database - Replication - Url blacklist updated: []"},"log":{"offset":2736,"file":{"path":"/vagrant/assembly/ds_RecordingManager/coox/mars/CooxDaemon/replication0.log"}},"ecs":{"version":"1.10.0"},"@version":"1","input":{"type":"log"},"tags":["cooxdaemon","beats_input_codec_plain_applied"]}
 
 # Cooxviewer:
 
 Before:
 
-5/11/21 17:22:54.265 - [INFO] : Relaunching viewer with command : /home/experiences/mars/com-mars/view -clientType=cs -view=view_VacuumSynoptic -relaunched -no_lock http://172.19.1.6:8080
+5/11/21 17:22:54.265 - [INFO] : Connection error: StringButton With:d03-1-cx0/dt/diode.fly_insert/insert
 
 After:
 
-{"agent":{"name":"localhost.localdomain","type":"filebeat","ephemeral_id":"a1ad8dcd-87a5-4f06-98ac-e753a145cb34","version":"7.14.0","hostname":"localhost.localdomain","id":"5f61175d-e407-49d3-b9a3-3efa77d25554"},"@timestamp":"2020-12-26T08:01:13.696Z","host":{"name":"localhost.localdomain"},"log":{"offset":5236,"file":{"path":"/vagrant/assembly/ds_RecordingManager/coox/mars/CooxViewer/Soleil_CooxViewer.2020-12-26_09.log"}},"ecs":{"version":"1.10.0"},"@version":"1","input":{"type":"log"},"tags":["cooxviewer","beats_input_codec_plain_applied"],"cooxviewer":{"threadnumber":"140","threadname":"DataSourceReconnectionManager ConnectionThread-DataConnectionManagement.log","level":"ERROR","message":"Connection error: StringButton With:d03-1-cx0/dt/diode.fly_insert/insert"}}
+{"agent":{"name":"localhost.localdomain","type":"filebeat","ephemeral_id":"a1ad8dcd-87a5-4f06-98ac-e753a145cb34","version":"7.14.0","hostname":"localhost.localdomain","id":"5f61175d-e407-49d3-b9a3-3efa77d25554"},"@timestamp":"2021-11-05T17:22:54.265Z","host":{"name":"localhost.localdomain"},"log":{"offset":5236,"file":{"path":"/vagrant/assembly/ds_RecordingManager/coox/mars/CooxViewer/Soleil_CooxViewer.2020-12-26_09.log"}},"ecs":{"version":"1.10.0"},"@version":"1","input":{"type":"log"},"tags":["cooxviewer","beats_input_codec_plain_applied"],"cooxviewer":{"threadnumber":"140","threadname":"DataSourceReconnectionManager ConnectionThread-DataConnectionManagement.log","level":"INFO","message":"Connection error: StringButton With:d03-1-cx0/dt/diode.fly_insert/insert"}}
